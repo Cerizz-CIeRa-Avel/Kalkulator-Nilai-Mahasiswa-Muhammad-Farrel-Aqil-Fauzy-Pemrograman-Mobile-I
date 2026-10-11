@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// Model Data Mahasiswa
 class Mahasiswa {
   final String nama;
   final double tugas;
@@ -20,17 +19,14 @@ class Mahasiswa {
     required this.status,
   });
 
-  // Factory method untuk menghitung data mahasiswa secara otomatis
   factory Mahasiswa.hitung({
     required String nama,
     required double tugas,
     required double uts,
     required double uas,
   }) {
-    // Rumus: 30% Tugas + 30% UTS + 40% UAS
     double nilaiAkhir = (0.30 * tugas) + (0.30 * uts) + (0.40 * uas);
 
-    // Menentukan Grade
     String grade;
     if (nilaiAkhir >= 85) {
       grade = 'A';
@@ -44,7 +40,6 @@ class Mahasiswa {
       grade = 'E';
     }
 
-    // Menentukan Status (>= 60 Lulus, < 60 Tidak Lulus)
     String status = (nilaiAkhir >= 60) ? 'Lulus' : 'Tidak Lulus';
 
     return Mahasiswa(
@@ -93,7 +88,6 @@ class _KalkulatorNilaiPageState extends State<KalkulatorNilaiPage> {
   final _utsController = TextEditingController();
   final _uasController = TextEditingController();
 
-  // Inisialisasi daftar dengan MINIMAL 10 MAHASISWA
   final List<Mahasiswa> _listMahasiswa = [
     Mahasiswa.hitung(nama: 'Andi Pratama', tugas: 85, uts: 90, uas: 88),
     Mahasiswa.hitung(nama: 'Budi Santoso', tugas: 70, uts: 75, uas: 80),
@@ -117,10 +111,8 @@ class _KalkulatorNilaiPageState extends State<KalkulatorNilaiPage> {
           uas: double.parse(_uasController.text),
         );
 
-        // Tambahkan ke daftar mahasiswa
         _listMahasiswa.insert(0, mhsBaru);
 
-        // Reset Form setelah berhasil ditambahkan
         _namaController.clear();
         _tugasController.clear();
         _utsController.clear();
